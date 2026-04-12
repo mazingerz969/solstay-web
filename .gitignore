@@ -24,3 +24,6 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 database/database.sqlite
+portfolio-screenshots/node_modules/
+portfolio-screenshots/package*.json
+portfolio-screenshots/capture.mjs
