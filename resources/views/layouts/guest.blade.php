@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon-32.png') }}">
     <title>{{ config('app.name', 'SolStay') }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700|poppins:600,700,800&display=swap" rel="stylesheet" />
@@ -74,7 +75,7 @@
 <body style="background: linear-gradient(135deg, #f0f9f9 0%, #e8f4f8 50%, #fef3f0 100%); color: var(--color-text); font-family: 'Inter', sans-serif; margin: 0; min-height: 100vh;">
     <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;">
         <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 10px; margin-bottom: 28px;">
-            <div style="background: var(--color-primary); width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; color: white; font-family: 'Poppins', sans-serif;">S</div>
+            <img src="{{ asset('logo.png') }}" alt="SolStay" style="width: 48px; height: 48px; border-radius: 10px;">
             <span style="font-size: 24px; font-weight: 700; color: var(--color-text); font-family: 'Poppins', sans-serif;">Sol<span style="color: var(--color-primary);">Stay</span></span>
         </a>
 

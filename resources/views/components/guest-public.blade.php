@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon-32.png') }}">
     <title>{{ $title ?? 'SolStay' }} — SolStay</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800&family=inter:400,500,600&display=swap" rel="stylesheet" />
@@ -32,7 +33,7 @@
     <nav style="background: white; border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 50;">
         <div class="max-w-7xl mx-auto flex items-center justify-between" style="padding: 14px 24px;">
             <a href="{{ route('landing') }}" class="flex items-center gap-2" style="text-decoration: none;">
-                <div style="background: var(--color-primary); width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: white; font-family: 'Poppins', sans-serif;">S</div>
+                <img src="{{ asset('logo.png') }}" alt="SolStay" style="width: 36px; height: 36px; border-radius: 8px;">
                 <span style="font-size: 20px; font-weight: 700; color: var(--color-text); font-family: 'Poppins', sans-serif;">Sol<span style="color: var(--color-primary);">Stay</span></span>
             </a>
 
@@ -89,7 +90,7 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8" style="padding: 48px 24px;">
             <div>
                 <div class="flex items-center gap-2" style="margin-bottom: 12px;">
-                    <div style="background: var(--color-primary); width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: white;">S</div>
+                    <img src="{{ asset('logo.png') }}" alt="SolStay" style="width: 28px; height: 28px; border-radius: 6px;">
                     <span style="font-size: 16px; font-weight: 700; color: var(--color-text); font-family: 'Poppins', sans-serif;">SolStay</span>
                 </div>
                 <p style="color: var(--color-text-secondary); font-size: 14px; line-height: 1.6;">{{ config('solstay.business.description_' . app()->getLocale()) }}</p>
