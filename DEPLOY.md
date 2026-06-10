@@ -1,5 +1,42 @@
 # Despliegue online — SolStay (opción A: mismo VPS que Spring Boot Dojo)
 
+## Despliegue rápido (esta noche)
+
+En **tu PC** (commits ya hechos; falta push si GitHub pide login):
+
+```bash
+cd ~/solstay-web && git push origin main
+cd ~/proyectos/spring-boot-dojo && git push origin main
+# Si falla: gh auth login
+```
+
+En **duckdns.org**: crea `solstay` → misma IP que `spring-dojo`.
+
+En el **VPS** (SSH):
+
+```bash
+# 1) Actualizar Dojo (nginx gateway)
+cd ~/proyectos/spring-boot-dojo && git pull && bash deploy/deploy.sh
+
+# 2) SolStay
+cd ~/proyectos
+git clone https://github.com/mazingerz969/solstay-web.git 2>/dev/null || (cd solstay-web && git pull)
+cd solstay-web
+cp .env.production.example .env.production
+
+# Genera y pega en .env.production:
+echo "APP_KEY=base64:$(openssl rand -base64 32)"
+echo "DB_PASSWORD=$(openssl rand -base64 24)"
+echo "DB_ROOT_PASSWORD=$(openssl rand -base64 24)"
+
+bash deploy/deploy.sh
+docker compose -f docker-compose.prod.yml logs -f app
+```
+
+Prueba: **http://solstay.duckdns.org** · Login admin: `admin@solstay.test` / `password`
+
+---
+
 Guía para publicar **SolStay** en el mismo servidor donde ya corre [Spring Boot Dojo](https://github.com/mazingerz969/spring-boot-dojo).
 
 ## Arquitectura

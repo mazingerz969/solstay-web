@@ -37,6 +37,7 @@ RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cac
     && chmod -R 775 storage bootstrap/cache
 
 COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/sites-enabled/default
 COPY deploy/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY deploy/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

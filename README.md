@@ -2,6 +2,11 @@
 
 MVP de alquiler vacacional (estilo Airbnb simplificado) para practicar Laravel en un caso real: reservas, disponibilidad, panel admin y confirmación en PDF.
 
+**Demo en vivo:** http://solstay.duckdns.org  
+**Repositorio:** https://github.com/mazingerz969/solstay-web
+
+**Acceso demo:** `admin@solstay.test` / `password` (admin) · `guest@solstay.test` / `password` (huésped)
+
 ## Autoría
 
 | Parte | Quién |
@@ -75,7 +80,7 @@ cp .env.production.example .env.production
 bash deploy/deploy.sh
 ```
 
-**Demo:** *(añade la URL tras desplegar, p. ej. http://solstay.duckdns.org)*
+**Demo:** http://solstay.duckdns.org (mismo VPS que Spring Boot Dojo, ver `DEPLOY.md`).
 
 ## Licencia
 
