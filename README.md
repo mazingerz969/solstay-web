@@ -5,7 +5,7 @@ MVP de alquiler vacacional (estilo Airbnb simplificado) para practicar Laravel e
 **Demo en vivo:** http://solstay.duckdns.org  
 **Repositorio:** https://github.com/mazingerz969/solstay-web
 
-**Acceso demo:** `admin@solstay.test` / `password` (admin) · `guest@solstay.test` / `password` (huésped)
+**Acceso demo:** `admin@solstay.es` / `password` (admin) · `maria@example.com` / `password` (huésped)
 
 ## Autoría
 
@@ -63,8 +63,8 @@ php artisan serve
 ```
 
 Usuarios demo creados por el seeder:
-- Admin: `admin@solstay.test` / `password`
-- Huésped: `guest@solstay.test` / `password`
+- Admin: `admin@solstay.es` / `password`
+- Huésped: `maria@example.com` / `password`
 
 ## Estado del proyecto
 
