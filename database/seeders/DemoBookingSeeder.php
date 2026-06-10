@@ -15,6 +15,10 @@ class DemoBookingSeeder extends Seeder
     {
         $maria = User::where('email', 'maria@example.com')->first();
 
+        if (! $maria || $maria->bookings()->exists()) {
+            return;
+        }
+
         // Completed booking with review
         $completed = Booking::create([
             'property_id' => 'costa-del-sol',

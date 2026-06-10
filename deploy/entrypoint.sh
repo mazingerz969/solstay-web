@@ -13,7 +13,7 @@ php artisan config:cache
 php artisan route:cache
 
 if [ "${RUN_SEEDER:-false}" = "true" ]; then
-    php artisan db:seed --force --no-interaction
+    php artisan db:seed --force --no-interaction || echo "Seeder skipped (datos demo ya presentes)"
 fi
 
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
