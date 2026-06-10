@@ -3,6 +3,7 @@
 .env
 .env.backup
 .env.production
+.env.production
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -27,3 +28,5 @@ database/database.sqlite
 portfolio-screenshots/node_modules/
 portfolio-screenshots/package*.json
 portfolio-screenshots/capture.mjs
+CREATIVE-LOG.md
+design-exports/

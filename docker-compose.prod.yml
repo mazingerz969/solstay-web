@@ -1,0 +1,72 @@
+# SolStay en producción — comparte VPS con Spring Boot Dojo (opción A).
+#
+# Uso:
+#   cp .env.production.example .env.production
+#   # Edita secretos y dominio
+#   bash deploy/deploy.sh
+#
+# Requiere la red Docker externa portfolio-net (la crea deploy.sh).
+# El nginx de Dojo enruta solstay.tudominio.com → contenedor solstay-app.
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: solstay
+      MYSQL_USER: solstay
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD required}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD required}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+      start_period: 30s
+    networks:
+      - solstay-net
+
+  app:
+    build: .
+    restart: unless-stopped
+    container_name: solstay-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_NAME: SolStay
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY:?APP_KEY required}
+      APP_URL: ${APP_URL:?APP_URL required}
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: warning
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: solstay
+      DB_USERNAME: solstay
+      DB_PASSWORD: ${DB_PASSWORD}
+      SESSION_DRIVER: database
+      SESSION_LIFETIME: 120
+      CACHE_STORE: database
+      QUEUE_CONNECTION: database
+      FILESYSTEM_DISK: local
+      RUN_SEEDER: ${RUN_SEEDER:-false}
+    volumes:
+      - storage_uploads:/var/www/html/storage/app
+    networks:
+      - solstay-net
+      - portfolio-net
+
+volumes:
+  mysql_data:
+  storage_uploads:
+
+networks:
+  solstay-net:
+  portfolio-net:
+    external: true
+    name: portfolio-net

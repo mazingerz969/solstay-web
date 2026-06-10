@@ -1,6 +1,15 @@
 # SolStay — Plataforma de alquiler vacacional
 
-Plataforma web full-stack estilo Airbnb/Holidu para alquilar propiedades vacacionales. Construida con **Laravel 13 + Alpine.js + Tailwind**, tema claro mediterráneo.
+MVP de alquiler vacacional (estilo Airbnb simplificado) para practicar Laravel en un caso real: reservas, disponibilidad, panel admin y confirmación en PDF.
+
+## Autoría
+
+| Parte | Quién |
+|-------|--------|
+| **Backend** | Desarrollo propio — Laravel, modelos, migraciones, services, policies, seeders, PDF, i18n |
+| **Frontend** | Maquetación asistida con IA (Blade, Alpine.js, Tailwind); integrada y adaptada al backend |
+
+El flujo de negocio, la API interna, la base de datos y la lógica de reservas son trabajo manual. Las vistas parten de un diseño generado con herramientas de IA y se conectaron al backend real.
 
 ## Características
 
@@ -23,15 +32,16 @@ Plataforma web full-stack estilo Airbnb/Holidu para alquilar propiedades vacacio
 | Auth | Laravel Breeze |
 | PDF | DomPDF |
 | Base de datos | MySQL / SQLite (dev) |
-| Fuentes | Inter + Poppins (Bunny Fonts) |
+| Fuentes | Inter, Poppins, Fraunces (auth) |
 
-## Arquitectura
+## Backend (desarrollo propio)
 
-- **6 migraciones** + modelos Eloquent con relaciones (`User`, `Property`, `PropertyPhoto`, `Booking`, `BlockedDate`, `Review`)
-- **2 enums** tipados (`BookingStatus`, `PropertyType`)
-- **4 services** con lógica de negocio (`AvailabilityService`, `BookingService`, `PriceService`, `PdfService`)
-- **10 controllers** separados por rol (público, guest, admin)
-- **57 rutas** con middlewares (`auth`, `admin`, `locale`)
+- Modelos Eloquent y relaciones: `User`, `Property`, `PropertyPhoto`, `Booking`, `BlockedDate`, `Review`
+- Enums: `BookingStatus`, `PropertyType`
+- Services: `AvailabilityService`, `BookingService`, `PricingService`, `CalendarService`
+- PDF de confirmación vía DomPDF en `BookingController`
+- Controllers por rol (público, huésped, admin), policies y middleware `admin`
+- Seeders con datos demo (propiedades en Málaga y Granada)
 
 ## Instalación
 
@@ -53,7 +63,19 @@ Usuarios demo creados por el seeder:
 
 ## Estado del proyecto
 
-MVP funcional y navegable de principio a fin. Roadmap: pasarela de pagos (Stripe), API REST con Sanctum, tests (PHPUnit/Pest), deploy a producción.
+MVP funcional y navegable de principio a fin. Roadmap: pasarela de pagos (Stripe), API REST con Sanctum, tests (PHPUnit/Pest).
+
+## Despliegue en producción
+
+Mismo VPS que [Spring Boot Dojo](https://github.com/mazingerz969/spring-boot-dojo), enrutado por subdominio. Guía completa: **[DEPLOY.md](./DEPLOY.md)**.
+
+```bash
+cp .env.production.example .env.production
+# Rellena APP_KEY, DB_PASSWORD, DB_ROOT_PASSWORD
+bash deploy/deploy.sh
+```
+
+**Demo:** *(añade la URL tras desplegar, p. ej. http://solstay.duckdns.org)*
 
 ## Licencia
 
